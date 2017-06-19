@@ -7,8 +7,12 @@
  */
 package com.mycompany.htmlsorter;
 
+import com.mycompany.htmlsorter.ui.HTMLSorterGUI;
 import com.mycompany.htmlsorter.utils.*;
 import java.io.IOException;
+
+import java.io.IOException;
+import javax.swing.SwingUtilities;
 
 public class HTMLSorter {
 
@@ -17,25 +21,10 @@ public class HTMLSorter {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        
-        ReadConfig RC = new ReadConfig();
-        RC.setProperty("html", "C:/Users/WeeklySchedule.html");
-        RC.setProperty("description", "C:/Users/Descriptins.txt");
-        RC.setProperty("finishedfile", "C:/Users/");
-        if(!RC.arePropertiesSet()){
-            System.out.println("No props have been set");
-        }
 
-        ParseHTML PH = new ParseHTML();
-        PrepareFile PF = new PrepareFile();
-        
-        PH.ParseHTML();
-
-        PF.modifyMonth();
-        PF.removeWeekday();
-        PF.modifiyDay();
-        
-        SortPreparedFile SPF = new SortPreparedFile();
-        SPF.sort();
+        SwingUtilities.invokeLater(() -> {
+            HTMLSorterGUI.start();
+        });
     }
 }
+

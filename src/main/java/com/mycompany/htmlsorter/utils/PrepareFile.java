@@ -16,7 +16,6 @@ import java.io.IOException;
 
 public class PrepareFile {
 
-    private final String path;
     private Scanner sc;
     private final String[] monthREGEX;
     private final String[] monthNumberREPLACE;
@@ -24,8 +23,9 @@ public class PrepareFile {
     private final String blankREPLACE;
     private final String[] dayREGEX;
     private final String[] dayREPLACE;
+    private final String parsedPath;
 
-    public PrepareFile() {
+    public PrepareFile(String parsedPath) {
         monthREGEX = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
             "Oct", "Nov", "Dec"};
         monthNumberREPLACE = new String[]{"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
@@ -36,45 +36,45 @@ public class PrepareFile {
         dayREPLACE = new String[]{"31", "30", "29", "28", "27", "26", "25", "24", "23", "22", "21", "20", "19", "18", "17", "16", "15",
             "14", "13", "12", "11", "10", "09", "08", "07", "06", "05", "04", "03", "02", "01"};
 
-        path = "/home/john/Parsed.txt";
+        this.parsedPath = parsedPath;
     }
 
     public void modifyMonth() {
-        sc = new Scanner(path);
+        sc = new Scanner(parsedPath);
         while (sc.hasNext()) {
             String str = sc.nextLine();
             String[] INPUT = str.split(" ");
             for (int counter = 0; counter < INPUT.length; counter++) {
                 for (int regArray = 0; regArray < monthREGEX.length; regArray++) {
-                    modifyFile(path, monthREGEX[regArray], monthNumberREPLACE[regArray]);
+                    modifyFile(parsedPath, monthREGEX[regArray], monthNumberREPLACE[regArray]);
                 }
             }
         }
     }
 
     public void removeWeekday() {
-        sc = new Scanner(path);
+        sc = new Scanner(parsedPath);
 
         while (sc.hasNext()) {
             String str = sc.nextLine();
             String[] INPUT = str.split(" ");
             for (int counter = 0; counter < INPUT.length; counter++) {
                 for (int regArray = 0; regArray < weekdayREGEX.length; regArray++) {
-                    modifyFile(path, weekdayREGEX[regArray], blankREPLACE);
+                    modifyFile(parsedPath, weekdayREGEX[regArray], blankREPLACE);
                 }
             }
         }
     }
 
     public void modifiyDay() {
-        sc = new Scanner(path);
+        sc = new Scanner(parsedPath);
 
         while (sc.hasNext()) {
             String str = sc.nextLine();
             String[] INPUT = str.split(" ");
             for (int counter = 0; counter < INPUT.length; counter++) {
                 for (int regArray = 0; regArray < dayREGEX.length; regArray++) {
-                    modifyFile(path, dayREGEX[regArray], dayREPLACE[regArray]);
+                    modifyFile(parsedPath, dayREGEX[regArray], dayREPLACE[regArray]);
                 }
             }
         }

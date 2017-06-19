@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class SortPreparedFile {
 
     private final String Arrow;
-    private final String path;
+    private final String parsedPath;
     private String descriptionPath;
     private File descriptionFile;
     private final File file;
@@ -32,17 +32,19 @@ public class SortPreparedFile {
     private final ArrayList<String> EndDate;
     private Event[][] EventArray;
 
-    public SortPreparedFile() throws FileNotFoundException {
-        path = ("/home/john/Parsed.txt");
-        file = new File(path);
+    public SortPreparedFile(String parsedPath, String descriptionPath) throws FileNotFoundException {
+        this.parsedPath = parsedPath;
+        this.descriptionPath = descriptionPath;
+        file = new File(parsedPath);
         StartDate = new ArrayList();
         EndDate = new ArrayList();
         Arrow = "⤵";
         EventArray = new Event[48][7];
-        input = new Scanner(file);
+
     }
-    
-    public void sort() throws FileNotFoundException{
+
+    public void sort() throws FileNotFoundException {
+        input = new Scanner(file);
         for (int i = 0; i < 7; i++) {
             String dates = input.nextLine();
             StartDate.add(dates);
@@ -109,7 +111,7 @@ public class SortPreparedFile {
     }
 
     private void printEventArray() throws FileNotFoundException {
-        String pathToFinishedFile = "WeeklySchedule.csv";
+        String pathToFinishedFile = parsedPath;
         File finishedFile = new File(pathToFinishedFile);
         PrintWriter pw = new PrintWriter(finishedFile);
         pw.write("Subject,Start Date,Start Time,End Date,End Time,All Day Event,Description,Location,Private");
@@ -126,24 +128,21 @@ public class SortPreparedFile {
                     sb.append(EventArray[row][column].getEndDate() + ",");
                     sb.append(EventArray[row][column].getEndTime() + ",");
                     sb.append("FALSE" + ",");
-                    sb.append(findDescription(EventArray[row][column].getEventName())+",");
+                    sb.append(findDescription(EventArray[row][column].getEventName()) + ",");
                     sb.append(",,");
                     sb.append("TRUE");
                     pw.write(sb.toString());
                     pw.write("\r\n");
-
                 }
             }
         }
         pw.close();
-
     }
 
     private String findDescription(String passedEvent) throws FileNotFoundException {
 
         boolean reachedDescriptionEnd = false;
         StringBuilder descriptionBuilder = new StringBuilder();
-        descriptionPath = "Descriptions.txt";
         descriptionFile = new File(descriptionPath);
         Scanner sc = new Scanner(descriptionFile);
         while (sc.hasNextLine()) {
@@ -157,11 +156,10 @@ public class SortPreparedFile {
                     } else if (temp.equals("*****************************************************************")) {
                         reachedDescriptionEnd = true;
                     }
-
                 }
             }
-
         }
         return descriptionBuilder.toString();
     }
 }
+
