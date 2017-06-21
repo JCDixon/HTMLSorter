@@ -18,7 +18,7 @@ public class HTMLSorterGUI {
     public static void start() {
         MainFrame = new JFrame();
         MainFrame.setSize(640, 480);
-        MainFrame.setTitle("HTML Sorter");
+        MainFrame.setTitle("WeeklySchedule.html to CSV");
         MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         choosePanel cPanel = new choosePanel();

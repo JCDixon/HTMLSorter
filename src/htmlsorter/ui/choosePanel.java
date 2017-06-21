@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package htmlsorter.ui;
+
 import htmlsorter.utils.ParseHTML;
 import htmlsorter.utils.PrepareFile;
 import htmlsorter.utils.SortPreparedFile;
@@ -26,6 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author John
  */
 public class choosePanel extends JPanel {
+
     private final JButton ButtonOkay;
     private final JButton scheduleBrowseButton;
     private final JButton descriptionBrowseButton;
@@ -69,7 +71,6 @@ public class choosePanel extends JPanel {
         });
 
 //********************END CODE FOR HTML BUTTONS, LABELS, AND TEXT AREA********************//
-
 //********************START CODE FOR DESCRIPTION BUTTONS, LABELS, AND TEXT AREA********************//    
         descriptionLabel = new JLabel("Choose location of Descriptions.txt");
         DescriptionLocationDisplay = new JTextArea();
@@ -138,6 +139,10 @@ public class choosePanel extends JPanel {
         });
 //********************************END CODE FOR OKAY BUTTON********************************//
 
+        addComponents();
+    }
+
+    private void addComponents() {
         this.add(HTMLLabel);
         this.add(HTMLLocationDisplay);
         this.add(scheduleBrowseButton);
